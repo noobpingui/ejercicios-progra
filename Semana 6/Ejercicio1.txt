@@ -1,0 +1,13 @@
+1. Cree dos funciones que impriman dos cosas distintas, y haga que la primera llame la segunda.
+
+def first_function():
+    print("Esta es la primera funcion")
+    second_function()
+
+
+def second_function():
+    print("La segunda funcion esta siendo llamada desde la primera funcion")
+
+
+
+first_function()

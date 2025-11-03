@@ -1,0 +1,28 @@
+1. **Cree un algoritmo que le pida un numero al usuario, y realice una suma de cada numero del 1 hasta ese número ingresado. Luego muestre el resultado de la suma.**
+    1. **3 → 6 (1 + 2 + 3)**
+    2. **5 → 15 (1 + 2 + 3 + 4 + 5)**
+    3. **12 → 78 (1 + 2 + 3 + 4 + 5 + 6 + 7 + 8 + 9 + 10 + 11 + 12)**
+
+    Respuesta:
+
+1.Inicio.
+
+2.Definir Numero
+
+3.Definir Contador = 1
+
+4.Definir Resultado = 0
+
+5.Mostrar “Indique el numero”
+
+6.Pedir Numero
+
+7.Mientras que (Contador ≤ Numero) repetir:
+    a. Resultado = (Resultado + Contador)
+    b. Contador = (Contador + 1)
+
+8.Mostrar “El resultado de la suma es”
+
+9.Mostrar Resultado
+
+10.Fin

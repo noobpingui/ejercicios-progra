@@ -1,0 +1,30 @@
+1. Cree un algoritmo para ver un video en Youtube. Sea lo más especifico posible.
+Respuesta: 
+
+1. Inicio.
+
+2. Vamos a la computadora. 
+  i. Si la computadora esta encendida:
+    a. Ingresamos a youtube.com
+  ii. Sino:
+    a. Encender la computadora 
+    b. Entramos a youtube.com
+
+3. Hacer: (do)
+    i. Seleccionar el video que deseo reproducir
+    ii. Mientras el video está en reproducción:
+        a. Si el volumen está muy alto:
+            i. Ajustar el volumen.
+        b. Sino:
+            i. Dejar el volumen como esta.
+    iii. Si el video ya lo vi O ya se terminó de reproducir:
+        a. Reproducir el video nuevamente
+    iv. Sino:
+        a. Seleccionar otro video
+    v.  Sino: 
+        a. Salir de youtube
+ 4. Mientras (while) este en youtube.com
+
+ 5. Apagar la computadora. 
+ 
+ 6. Fin 

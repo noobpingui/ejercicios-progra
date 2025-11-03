@@ -1,0 +1,18 @@
+6. Cree una función que acepte un string con palabras separadas por un guión y retorne un string igual pero ordenado alfabéticamente.
+    a. Hay que convertirlo a lista, ordenarlo, y convertirlo nuevamente a string.
+    b. “python-variable-funcion-computadora-monitor” → “computadora-funcion-monitor-python-variable”
+
+
+def sort_list(parameter_1):
+    my_list = parameter_1.split("-") #Divido las palabras del string y creo la lista con los elementos
+    sorted_list = sorted(my_list) #Ordeno los elementos de la lista y los guardo en una nueva lista ordenada
+
+    return "-".join(sorted_list) #Retorno la lista ordenada como un nuevo string    
+
+
+def main():
+    my_string = "python-variable-funcion-computadora-monitor" 
+    print(sort_list(my_string))
+
+
+main()  

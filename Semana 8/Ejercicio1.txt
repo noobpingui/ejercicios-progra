@@ -1,0 +1,63 @@
+1. Cree un programa que lea nombres de canciones de un archivo (línea por línea) y guarde en otro archivo los mismos nombres ordenados alfabéticamente.
+
+#I decided to use a loop to read the content from the files instead of using readlines() due to with 
+#this method, all the list content gets printed, including the new line "\n"
+#I investigated a little bit about it and I know there's a way to remove the new line "\n", I rather doing it this way though.   
+
+def create_file_1(file_1):
+    try:
+        with open(file_1, "x") as file:
+            file.write('Song: In the End, Artist: Linkin Park\n')
+            file.write('Song: Creep, Artist: Radio Head\n')
+            file.write('Song: Crazy, Artist: Aerosmith\n')
+            print("File created successfully.")
+    except FileExistsError:
+        print("Error: The file already exists.")
+    except Exception as e:
+        print(f"Error: {e}")
+
+def read_songs_file(file_1):
+    songs_list = []   
+    try:
+        with open(file_1, "r") as file:
+            for line in file:
+                songs_list.append(line.strip())
+        print(f"File 1 content - Lista Original: {songs_list}")            
+    except FileNotFoundError:
+        print("Error: The file does not exist.")
+    except Exception as e:
+        print(f"Error: {e}")
+
+def copy_songs_file(file_1, file_2):
+    try:
+        with open(file_1, "r") as file:
+            contenido = file.readlines()
+            contenido = sorted(contenido)
+        with open(file_2, "x") as file_copy:
+            file_copy.writelines(contenido)
+        print("File copied successfully.")
+    except FileExistsError:
+        print("Error: The file already exists.")
+    except FileNotFoundError:
+        print("Error: The file does not exist.")
+    except Exception as e:
+        print(f"Error: {e}")
+
+def read_file_2(file_2):  
+    songs_list = []   
+    try:
+        with open(file_2, "r") as file:
+            for line in file:
+                songs_list.append(line.strip())
+        print(f"File 2 content - Lista Ordenada:: {songs_list}")            
+    except FileNotFoundError:
+        print("Error: The file does not exist.")
+    except Exception as e:
+        print(f"Error: {e}")
+
+file_1 = "songs.txt"
+file_2 = "songs_copy.txt"
+create_file_1(file_1)
+read_songs_file(file_1)
+copy_songs_file(file_1,file_2)
+read_file_2(file_2)

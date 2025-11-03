@@ -1,0 +1,132 @@
+2. Cree un algoritmo que describa su rutina diaria. Use condiciones, condiciones multiples y ciclos.
+Respuesta:
+
+1. Inicio.
+
+2. Me despierto
+    i. Si suena la alarma & el reloj marca las 7 am:
+        a. Me levanto de la cama.
+        b. Tiendo la cama.
+    ii. Sino:
+        a. Sigo durmiendo.
+
+3. Voy a la cocina.
+
+4. Preparo el desayuno
+    i. Hago tostadas de pan
+        a. Saco tres rebanadas de pan
+        b. Introduzco el pan en la tostadora
+        c. Saco el pan e la tostadora en dos minutos O hasta que suene la alarma de la tostadora
+        d. Pongo el pan en un plato
+    ii. Hago huevo frito
+        a. Pongo un sartén en la cocina
+        b. Enciendo la cocina
+        c. Abro tres huevos
+        d. Pongo los huevos en el sartén
+        e. Agrego sal a los huevos
+        f. Revuelvo los huevos
+        g. Pongo los huevos en un plato
+
+5. Me como el desayuno
+
+6. Voy al baño
+    i. Me lavo los dientes
+        a. Tomo el cepillo
+        b. Le pongo pasta dental al cepillo
+        c. Me cepillo los dientes
+        d. Me enjuago la boca
+        e. Lavo el cepillo de dientes
+        f. Guardo el cepillo
+
+7. Me baño
+    i. Me enjabono
+        a. Tomo el jabón
+        b. Me enjabono todo el cuerpo
+        c. Tomo el champú
+        d. Me enjabono el pelo
+        e. Abro la ducha
+    ii. Mientras tenga jabón O champú en el cuerpo:
+        a. Me meto debajo de la ducha
+    iii. Cierro la ducha
+    iv. Tomo un paño
+    v. Mientras tenga gotas de agua en el cuerpo:
+        a. Me seco con el paño
+
+8. Me visto
+    i. Me pongo un boxer
+    ii. Me pongo unas medias
+    iii. Me pongo una pantaloneta
+    iv. Me pongo una camisa
+    v. Me pongo desodorante
+    vi. Me pongo tennis.
+
+9. Voy a la cochera
+    i. Abro el portón
+    ii. Entro al carro
+        a. Enciendo el carro
+        b. Pongo reversa
+        c. Saco el carro de la cochera
+    iii. Cierro el portón
+    iv. Manejo hasta el gym
+
+10. Parqueo el carro
+    i. Si hay campo en la primera planta:
+        a. Parqueo el carro en la primera planta
+    ii. Sino:
+        a. Parqueo el carro en la segunda planta
+    iii. Sino:
+        a. Parqueo en cualquier lugar disponible 
+
+11. Hago Ejercicio
+    i. Mientras esté dos horas en el gym:
+        a. Hago pesas
+        b. Hago cardio
+
+12. Regreso a casa
+    i. Voy al parqueo
+    ii. Entro al carro
+    iii. Manejo hasta la casa
+    iv. Abro el portón
+    v. Guardo el carro
+    vi. Cierro el portón
+
+13. Preparo el batido
+    i. Voy a la cocina
+    ii. Saco la leche
+    iii. Lleno el shacker con leche
+    iv. Pongo proteína en el shacker
+    v. Guardo la leche
+    vi. Me tomo el batido.
+
+14. Si tengo clases de la universidad:
+    i. Me uno a la clase virtual
+        a. Enciendo la laptop
+        b. Entro al campus virtual
+        c. Entro a teams
+        d. Me uno a la clase
+    ii. Mientras este en clases:
+        a. Tomo apuntes
+        b. Descargo el material nuevo
+        c. Organizo el material & los pendientes
+    iii. Cierro los browsers.
+    iv. Apago la laptop.
+
+15. Sino:
+    i. Jugar videojuegos
+        a. Entro a Steam
+        b. Selecciono un videojuego
+        c. Inicio el videojuego
+    ii. Mientras el reloj no marque las 10 pm:
+        a. Sigo jugando
+    iii. Salgo del videojuego
+    iv. Apago la laptop
+
+16. Ir a dormir
+    i. Voy al cuarto
+    ii. Tiendo la cama
+    iii. Pongo la alarma para las 7 am
+    iv. Apago las luces
+    v. Mientras la alarma no suene O el reloj no marque las 7 am:
+        a. Sigo durmiendo
+
+17.  Fin 
