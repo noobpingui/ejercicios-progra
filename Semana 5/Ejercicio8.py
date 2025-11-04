@@ -1,0 +1,59 @@
+
+
+# 1. Cree un programa que use una lista para eliminar keys de un diccionario.
+#     a. Ejemplos:
+#     b. `list_of_keys = [’access_level’, ‘age’]`
+#     `employee = {’name’: ‘John’, ‘email’: ‘john@ecorp.com’, ‘access_level’: 5, ‘age’: 28}`
+#     → `{’name’: ‘John’, 'email’: ‘john@ecorp.com’}`
+
+
+#Aqui me paso algo muy curioso, a la primera solucion que llegue fue a esta:
+
+list_of_keys = ["access_level", "age", "random_key", "hobbies"]
+employee = {
+    
+            "name": "Beto", 
+            "email": "beto@example.com", 
+            "access_level": 3, 
+            "age": 30,
+            "role" : "Developer",
+            "hobbies" : "videogames"
+
+}
+
+for keys in list_of_keys:
+    if (employee.get(keys) == None):
+        print("No existe el key")
+    else:    
+        for index in range(0,len(list_of_keys),1):
+            if (keys == list_of_keys[index]):
+                employee.pop(list_of_keys[index])
+                break
+            else:
+                continue
+
+print(employee)
+
+#funciona, pero no es optima. Despues de revisar, logre optimizar el codigo para no tener que recorrer varias veces la lista
+#y esta es la solucion final, verificando directamente si existe o no el key en el diccionario en lugar de estar comparando 
+#key por key varias veces:
+
+list_of_keys = ["access_level", "age", "random_key", "hobbies"]
+employee = {
+    
+            "name": "Beto", 
+            "email": "beto@example.com", 
+            "access_level": 3, 
+            "age": 30,
+            "role" : "Developer",
+            "hobbies" : "videogames"
+
+}
+
+for keys in list_of_keys:
+    if (keys in employee):
+        employee.pop(keys)
+    else:
+        print("No existe el key")    
+
+print(employee)

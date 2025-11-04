@@ -1,0 +1,59 @@
+
+
+# 1. Dada `n` cantidad de notas de un estudiante, calcular:
+#     a. Cuantas notas tiene aprobadas (mayor a 70).
+#     b. Cuantas notas tiene desaprobadas (menor a 70).
+#     c. El promedio de todas.
+#     d. El promedio de las aprobadas.
+#     e. El promedio de las desaprobadas.
+
+#inputs para mis variables
+total_grades = []
+approved = 0
+failed = 0
+total_average = 0
+approved_average = 0
+failed_average = 0
+
+#Procesos
+
+while(True):
+    quantity = int(input("Indique la cantidad de notas "))
+    if(quantity < 1):
+        print("Debe ingresar un numero mayor a 0 para proceder con el calculo de las notas")
+    else:
+        break
+
+for each_grade in range(quantity):
+    while(True):    
+        grade = int(input(f"Indique la nota {each_grade + 1} "))
+        if((grade >= 0) & (grade <=100)):
+            total_grades.append(grade)
+            total_average = (total_average + grade)
+            if(grade >= 70):
+                approved = (approved + 1)
+                approved_average = (approved_average + grade)
+            else:
+                failed = (failed + 1)
+                failed_average = (failed_average + grade)
+            break
+        else:
+            print("La nota no puede ser un numero negativo o mayor a 100. Intentelo de nuevo")
+
+#Outcome
+total_average = (total_average/quantity)
+print(f"La cantidad de notas aprobadas es {approved}")
+print(f"La cantidad de notas desaprobadas es {failed}")
+print(f"El promedio de todas las notas es {total_average}")
+
+if(approved == 0):
+    print("No hubieron notas aprobadas, por lo tanto no hay promedio")
+else:
+    approved_average = (approved_average/approved)
+    print(f"El promedio de todas las notas aprobadas es {approved_average}")
+
+if(failed == 0):
+    print("No hubieron notas desaprobadas, por lo tanto no hay promedio")
+else:    
+    failed_average = (failed_average/failed)
+    print(f"El promedio de todas las notas desaprobadas es {failed_average}")

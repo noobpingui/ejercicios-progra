@@ -1,0 +1,19 @@
+1. En el escritorio (/Desktop), crear tres carpetas nombradas Empleado1, Empleado2 y Empleado3.
+2. Dentro de cada carpeta(creadas en el punto 1), crear un archivo de texto con el nombre bienvenida1.txt en la carpeta Empleado1, bienvenida2.txt en la carpeta Empleado2 y bienvenida3.txt en la carpeta Empleado3.
+3. Crear una carpeta en /Desktop llamada Empleados la cual debe contener las carpetas creadas anteriormente. Mover las carpetas del punto 1 a Empleados.
+4. Listar los procesos en el sistema.
+5. En una terminal aparte ejecutar el comando Ping a Google y no lo detenga.
+6. En la terminal actual listar los procesos, identificar el id del proceso Ping a Google y detener la ejecución desde la terminal actual.
+7. Visualice la hora del sistema operativo.
+8. Renombrar los archivos de textos creados en el punto 2, a welcome.txt.
+9. Eliminar la carpeta Empleado creada en el punto 3.
+
+---
+
+1. **Entrega final:**
+Debes crear un documento en formato **PDF** que contenga lo siguiente:
+    1. **Cada comando que hayas ejecutado**, escrito claramente.
+    2. **Una captura de pantalla por cada paso**, donde se muestre la ejecución del comando y el resultado obtenido.
+
+
+PDF adjunto con los commandos y los screenshots correspondientes realizados en PowerShell. (Ejercicios_de_Terminales.pdf)

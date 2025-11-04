@@ -1,0 +1,18 @@
+
+
+# Cree un programa que le pida tres números al usuario y muestre el mayor.
+
+#inputs para mis variables
+first_number = int(input("Indique el primer numero "))
+second_number = int(input("Indique el segundo numero "))
+third_number = int(input("Indique el tercer numero "))
+
+#Procesos
+if(first_number > second_number) & (first_number > third_number):
+    print(f"El numero mayor es {first_number}")
+elif(second_number > first_number) & (second_number > third_number):
+    print(f"El numero mayor es {second_number}")
+elif(third_number > first_number) & (third_number > second_number):    
+    print(f"El numero mayor es {third_number}")
+else:
+    print("Hay que investigar otro escenario")

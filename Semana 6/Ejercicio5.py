@@ -1,0 +1,40 @@
+
+
+# 1. Cree una función que imprima el numero de mayúsculas y el numero de minúsculas en un string.
+#     a. “I love Nación Sushi” → “There’s 3 upper cases and 13 lower cases”
+
+#Funcion para sacar las Mayusculas
+def get_upper_case(string, uppers = 0):
+    for index in range(0, len(string), 1):
+        if(string[index] ==  string[index].upper()) & (string[index] != " "):
+            uppers = uppers+1 
+        else:
+            continue
+
+            
+    return uppers    
+
+
+
+#Funcion para sacar las Minusculas
+def get_lower_case(string, lowers = 0):
+    for index in range(0, len(string), 1):
+        if(string[index] ==  string[index].lower()) & (string[index] != " "):
+            lowers = lowers+1 
+        else:
+            continue
+
+            
+    return lowers    
+
+
+
+#Funcion para definir el string, llamar ambas funciones e imprimir los resultados
+def main():
+    my_string = "I love Nacion Sushi" 
+    print(f"There's {get_upper_case(my_string)} upper cases and {get_lower_case(my_string)} lower cases in the string {my_string}")
+
+
+
+
+main()  

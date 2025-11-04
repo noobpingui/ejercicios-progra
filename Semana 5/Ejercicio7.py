@@ -1,0 +1,16 @@
+
+
+# 1. Cree un programa que cree un diccionario usando dos listas del mismo tamaño, usando una para sus keys, y la otra para sus values.
+#     a. Ejemplos:
+#     b. `list_a = [’first_name’, ‘last_name’, ‘role’]`
+#     `list_b = [’Alek’, ‘Castillo’, ‘Software Engineer’]`
+#     → `{’first_name’: ‘Alek’, ‘last_name’: ‘Castillo’, ‘role’: ‘Software Engineer’}`
+
+list_a = ["first_name", "last_name", "role"]
+list_b = ["Beto", "Fallas", "Student"]
+my_dictionary = {}
+
+for index in range (0, len(list_a), 1):
+    my_dictionary[list_a[index]] = list_b[index]
+
+print(my_dictionary)

@@ -1,0 +1,50 @@
+
+# 1. **Experimente haciendo sumas entre distintos tipos de datos y apunte los resultados.**
+#     a. **Si le salen errores, no se asuste. Lealos e intente comprender qué significan.
+#     *Los errores son oportunidades de aprendizaje.***
+#     b. **Por ejemplo:**
+#         1. **string + string → ?**
+#         2. **string + int → ?**
+#         3. **int + string → ?**
+#         4. **list + list → ?**
+#         5. **string + list → ?**
+#         6. **float + int → ?**
+#         7. **bool + bool → ?**
+
+#Variables a utilizar
+my_first_string = "Primer palabra"
+my_second_string = " Segunda palabra"
+my_first_int = 10
+my_first_float = 15.10
+my_first_list = ["hola", 2, "mundo", "tren", "quinto"]
+my_second_list = ["adios", 4, "world", "barco" "cuarto"]
+my_first_bool = True
+my_second_bool = False
+
+#1. string + string
+print(my_first_string + my_second_string)
+#Outcome: Primer palabra Segunda palabra
+
+#2. string + int
+print(my_first_string + my_first_int) 
+#Outcome: Por el tipo de dato, me da error al intentar sumarlos o concatenar
+
+#3. int + string
+print(my_first_int + my_first_string) 
+#Outcome: Por el tipo de dato, me da error al intentar sumarlos o concatenar
+
+#4. list + list
+print(my_first_list + my_second_list)
+#Outcome: ['hola', 2, 'mundo', 'tren', 'quinto', 'adios', 4, 'world', 'barcocuarto']
+
+#5. string + list
+print(my_first_string + my_first_list) 
+#Outcome: Por el tipo de dato, me da error al intentar sumarlos o concatenar
+
+#6. float + int
+print(my_first_float + my_first_int)
+#Outcome: 25.1
+
+#7. bool + bool
+print(my_first_bool + my_second_bool)
+#Outcome 1 (true)
