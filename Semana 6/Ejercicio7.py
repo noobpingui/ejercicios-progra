@@ -1,7 +1,9 @@
-7. Cree una función que acepte una lista de números y retorne una lista con los números primos de la misma.
-    a. [1, 4, 6, 7, 13, 9, 67] → [7, 13, 67]
-    b. Tip 1: Investigue la logica matematica para averiguar si un numero es primo, y conviertala a codigo. No busque el codigo, eso no ayudaria.
-    c. *Tip 2: Aquí hay que hacer varias cosas (recorrer la lista, revisar si cada numero es primo, y agregarlo a otra lista). Así que lo mejor es agregar **otra función** para revisar si el numero es primo o no.*
+
+
+# 1. Cree una función que acepte una lista de números y retorne una lista con los números primos de la misma.
+#     a. [1, 4, 6, 7, 13, 9, 67] → [7, 13, 67]
+#     b. Tip 1: Investigue la logica matematica para averiguar si un numero es primo, y conviertala a codigo. No busque el codigo, eso no ayudaria.
+#     c. *Tip 2: Aquí hay que hacer varias cosas (recorrer la lista, revisar si cada numero es primo, y agregarlo a otra lista). Así que lo mejor es agregar **otra función** para revisar si el numero es primo o no.*
 
 
 #Funcion para sacar las Numeros primos

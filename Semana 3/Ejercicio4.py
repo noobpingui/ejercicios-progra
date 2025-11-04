@@ -1,4 +1,4 @@
-1. Use la función print() para mostrar distintos textos en pantalla.
+# 1. Use la función print() para mostrar distintos textos en pantalla.
 
 firstVariable = "Hello World!";
 secondVariable = "Ejercicio de Python"
@@ -7,9 +7,3 @@ thirdVariable = "Esta es mi tercer variable"
 print(firstVariable)
 print(secondVariable)
 print(thirdVariable)
-
-Outcome:
-
-Hello World!
-Ejercicio de Python
-Esta es mi tercer variable

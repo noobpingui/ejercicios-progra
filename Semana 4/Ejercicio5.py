@@ -1,4 +1,6 @@
-4. Cree un programa que le pida tres números al usuario y muestre el mayor.
+
+
+# Cree un programa que le pida tres números al usuario y muestre el mayor.
 
 #inputs para mis variables
 first_number = int(input("Indique el primer numero "))

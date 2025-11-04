@@ -1,7 +1,8 @@
-3. Cree una función que retorne la suma de todos los números de una lista.
-    a. La función va a tener un parámetro (la lista) y retornar un numero (la suma de todos sus elementos).
-    b. [4, 6, 2, 29] → 41
 
+
+# 1. Cree una función que retorne la suma de todos los números de una lista.
+#     a. La función va a tener un parámetro (la lista) y retornar un numero (la suma de todos sus elementos).
+#     b. [4, 6, 2, 29] → 41
 
 #suma de elementos en una lista por medio de parametros
 def sum_list(parameter_1):

@@ -1,4 +1,6 @@
-1. Cree dos funciones que impriman dos cosas distintas, y haga que la primera llame la segunda.
+
+
+# Cree dos funciones que impriman dos cosas distintas, y haga que la primera llame la segunda.
 
 def first_function():
     print("Esta es la primera funcion")

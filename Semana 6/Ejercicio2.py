@@ -1,9 +1,11 @@
-2. Experimente con el concepto de scope:
-    a. Intente accesar a una variable definida dentro de una función desde afuera.
-    b.  Intente accesar a una variable global desde una función y cambiar su valor.
 
 
-a. 
+
+# 1. Experimente con el concepto de scope:
+#     a. Intente accesar a una variable definida dentro de una función desde afuera.
+#     b.  Intente accesar a una variable global desde una función y cambiar su valor.
+
+#a. 
 
 #Variable con Scope Local
 def first_function():
@@ -28,7 +30,7 @@ print(first_function())
 
 
 
-b. 
+#b. 
 
 #Variable con Scope Global
 global_variable = "Variable global"
@@ -55,3 +57,4 @@ def main():
 
 
 main()
+

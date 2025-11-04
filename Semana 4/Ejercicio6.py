@@ -1,10 +1,11 @@
-5. Dada `n` cantidad de notas de un estudiante, calcular:
-    a. Cuantas notas tiene aprobadas (mayor a 70).
-    b. Cuantas notas tiene desaprobadas (menor a 70).
-    c. El promedio de todas.
-    d. El promedio de las aprobadas.
-    e. El promedio de las desaprobadas.
 
+
+# 1. Dada `n` cantidad de notas de un estudiante, calcular:
+#     a. Cuantas notas tiene aprobadas (mayor a 70).
+#     b. Cuantas notas tiene desaprobadas (menor a 70).
+#     c. El promedio de todas.
+#     d. El promedio de las aprobadas.
+#     e. El promedio de las desaprobadas.
 
 #inputs para mis variables
 total_grades = []

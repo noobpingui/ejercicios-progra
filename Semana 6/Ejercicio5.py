@@ -1,5 +1,7 @@
-5. Cree una función que imprima el numero de mayúsculas y el numero de minúsculas en un string.
-    a. “I love Nación Sushi” → “There’s 3 upper cases and 13 lower cases”
+
+
+# 1. Cree una función que imprima el numero de mayúsculas y el numero de minúsculas en un string.
+#     a. “I love Nación Sushi” → “There’s 3 upper cases and 13 lower cases”
 
 #Funcion para sacar las Mayusculas
 def get_upper_case(string, uppers = 0):

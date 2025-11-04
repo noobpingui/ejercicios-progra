@@ -1,11 +1,18 @@
-4. Lea sobre el resto de métodos del módulo csv [aqui](https://docs.python.org/es/3/library/csv.html) y cree una version alternativa del ejercicio de arriba que guarde el archivo separado por *tabulaciones* en vez de por *comas*.
 
-Ejemplo de archivo final:
 
-nombre	genero	desarrollador	clasificacion
-Grand Theft Auto IV	Accion	Rockstar Games	M
-The Elder Scrolls IV: Oblivion	RPG	Bethesda	M
-Tony Hawk's Pro Skater 2	Deportes	Activision	T
+# 1. Cree un programa que me permita ingresar información de n cantidad de videojuegos y los guarde en un archivo csv.
+# Debe incluir:
+# - Nombre
+# - Género
+# - Desarrollador
+# - Clasificación ESRB
+
+# Ejemplo de archivo final:
+
+# nombre,genero,desarrollador,clasificacion
+# Grand Theft Auto IV,Accion,Rockstar Games,M
+# The Elder Scrolls IV: Oblivion,RPG,Bethesda,M
+# Tony Hawk's Pro Skater 2,Deportes,Activision,T
 
 import csv
 
@@ -34,7 +41,7 @@ def request_videogames():
 def create_videogames_csv(file_path, data, headers):
     try:
         with open(file_path,"x") as file:
-            writer = csv.DictWriter(file, headers, dialect='excel-tab')
+            writer = csv.DictWriter(file, headers)
             writer.writeheader()
             writer.writerows(data)
             print("File created successfully")

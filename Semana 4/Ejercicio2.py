@@ -1,15 +1,15 @@
-1. **Experimente haciendo sumas entre distintos tipos de datos y apunte los resultados.**
-    1. **Si le salen errores, no se asuste. Lealos e intente comprender qué significan.
-    *Los errores son oportunidades de aprendizaje.***
-    2. **Por ejemplo:**
-        1. **string + string → ?**
-        2. **string + int → ?**
-        3. **int + string → ?**
-        4. **list + list → ?**
-        5. **string + list → ?**
-        6. **float + int → ?**
-        7. **bool + bool → ?**
 
+# 1. **Experimente haciendo sumas entre distintos tipos de datos y apunte los resultados.**
+#     a. **Si le salen errores, no se asuste. Lealos e intente comprender qué significan.
+#     *Los errores son oportunidades de aprendizaje.***
+#     b. **Por ejemplo:**
+#         1. **string + string → ?**
+#         2. **string + int → ?**
+#         3. **int + string → ?**
+#         4. **list + list → ?**
+#         5. **string + list → ?**
+#         6. **float + int → ?**
+#         7. **bool + bool → ?**
 
 #Variables a utilizar
 my_first_string = "Primer palabra"

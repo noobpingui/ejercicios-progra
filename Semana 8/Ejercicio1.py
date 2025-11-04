@@ -1,4 +1,6 @@
-1. Cree un programa que lea nombres de canciones de un archivo (línea por línea) y guarde en otro archivo los mismos nombres ordenados alfabéticamente.
+
+
+# 1. Cree un programa que lea nombres de canciones de un archivo (línea por línea) y guarde en otro archivo los mismos nombres ordenados alfabéticamente.
 
 #I decided to use a loop to read the content from the files instead of using readlines() due to with 
 #this method, all the list content gets printed, including the new line "\n"
