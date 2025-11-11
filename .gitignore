@@ -1,0 +1,7 @@
+# To ignore Python cache files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Script to remove Python cache directories
+# Get-ChildItem -Recurse -Directory -Filter "__pycache__" | Remove-Item -Recurse -Force
