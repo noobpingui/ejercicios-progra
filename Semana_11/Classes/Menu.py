@@ -2,22 +2,20 @@ import os
 
 from Classes.csv_actions import export_csv_file, import_csv_file, CSV_FILE_PATH
 
-from Classes.Figures import Figures
 from Classes.Bus import Bus
 from Classes.Classroom import Classroom
 from Classes.Human import Human
+from Classes.Circle import Circle
+from Classes.Person import Person
 
 #function to display the dashboard menu and handle user interactions
 def dashboard_menu(current_option):
     
     #Instancing Bus Object and passing parameter for max_passengers
-    bus_1 = Bus(6)
+    bus_1 = Bus(4)
 
     #Instancing Classroom Object
     new_classroom = Classroom()
-
-    #Instancing Figures Object
-    new_figure = Figures()
 
     #Instancing Human Object
     new_human = Human()
@@ -46,23 +44,53 @@ def dashboard_menu(current_option):
                 
                 case 1:
                     #1st exercise - Circle Area
-                    #Calling method to calculate circule area and showing the outcome
-                    print(f"The area is {new_figure.get_circle_area()}")
+                    while True:
+                        try:
+                            radius = input("Enter the circle radius: ")
+                            if(radius.strip() == ""):
+                                raise ValueError("The response cannot be empty.")
+                    
+                            radius = float(radius)
+                            if radius < 0:
+                                raise ValueError("The radius must be a positive number")
+                            else:
+                                break
+                        except ValueError as ex:
+                            print(f"Error: {ex}")
+                    
+                    #Instancing Circle Object and calling its method
+                    new_circle = Circle(radius)
+                    print(f"The area is {new_circle.get_area()}")
                 
                 case 2:
                     #2nd exercise - To add passengers
-                    #The object Person gets created in the method itself every time a new passenger requires to be added.
-                    bus_1.to_add_passengers()
-                    print(f"List of passengers: {bus_1.bus_quota}")
+                    while True:
+                        if(len(bus_1.bus_quota) >= bus_1.max_passengers):
+                            print("The bus is full of its capacity. You cannot add more passengers")
+                            break
+                        else:
+                            answer = input("Would you like to add a new passenger? Yes/No ")
+                            if(answer.lower() == "yes"):
+                                passenger = Person()
+                                bus_1.to_add_passengers(passenger)
+                            elif(answer.lower() == "no"):
+                                break
+                            else:
+                                pass
+                    
+                    print("List of passengers:")
+                    for passenger in bus_1.bus_quota:
+                        print(f"{passenger}")
                     
                 case 3:
                     #3rd exercise - To remove passengers
-                    # if(len(bus_1.bus_quota) == 0):
-                    #     print("The bus is currently empty. Please consider adding passengers first")
-                    #     break
-                    # else:
-                        bus_1.to_remove_passengers()
-                        print(f"List of passengers: {bus_1.bus_quota}")
+                    if(len(bus_1.bus_quota) == 0):
+                        print("The bus is currently empty. Please consider adding passengers first")
+                    else:
+                        bus_1.to_remove_passengers(passenger)
+                        print("List of passengers:")
+                        for passenger in bus_1.bus_quota:
+                            print(f"{passenger}")
 
                 case 4:
                     #4rd exercise - reassembling student-scorecard project to work with objects.
