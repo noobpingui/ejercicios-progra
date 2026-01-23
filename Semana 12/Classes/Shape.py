@@ -4,11 +4,11 @@ from abc import ABC, abstractmethod
 class Shape(ABC):
     
     @abstractmethod
-    def calculate_perimeter():
+    def calculate_perimeter(self):
 
         pass
 
     @abstractmethod
-    def calculate_area():
+    def calculate_area(self):
 
         pass

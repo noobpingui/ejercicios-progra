@@ -7,13 +7,14 @@ from Classes.Multiple_inheritance import Manager
 def dashboard_menu(current_option):
 
     owned_account = False
+    current_balance = 0
     
     while True:
 
         try:
             
             print("Choose an option to proceed:")
-            print("1. To create a new Savings Account")
+            print(f"1. To create a new Savings Account - Current Balance: {current_balance} USD")
             print("2. To make a deposit")
             print("3. To make a withdrawal")
             print("4. To calculate perimeter")
@@ -28,29 +29,16 @@ def dashboard_menu(current_option):
                 case 1:
                     
                     #create a new Savings Account
-                    while True:
-                        try:
-                            min_balance = input("What amount would like to open this savings account with? ")
-                            if(min_balance.strip() == ""):
-                                raise ValueError("The response cannot be empty.")
-
-                            min_balance = int(min_balance)
-                            if min_balance < 0:
-                                raise ValueError("The amount must be a positive number")
-                            else:
-                                break
-                        except ValueError as ex:
-                            print(f"Error: {ex}")
-                    
-                    my_savings_account = SavingsAccount(min_balance)
-                    print(f"Congratulations!, your savings account has been successfully created with a balance of {min_balance} USD")
+                    my_savings_account = SavingsAccount(10)
+                    print(f"Congratulations!, your savings account has been successfully created with a balance of {my_savings_account.min_balance} USD")
                     owned_account = True
+                    current_balance = my_savings_account.balance
                 
                 case 2:
                     
                     #deposit
                     if (owned_account == False):
-                        print("You do not own a savings account yet, please consider creating a new one first")
+                        raise Exception("You do not own a savings account yet, please consider creating a new one first")
                         
                     else:
                         while True:
@@ -66,14 +54,16 @@ def dashboard_menu(current_option):
                             except ValueError as ex:
                                 print(f"Error: {ex}")
                         
-                        new_balance = my_savings_account.deposit_money(amount)
-                        print(f"Your balance is {new_balance} USD")
+                        current_balance = my_savings_account.deposit_money(amount)
+                        print(f"The deposit of {amount} USD has been completed") 
 
                 case 3:
                     
                     #withdrawal
                     if (owned_account == False):
-                        print("You do not own a savings account yet, please consider creating a new one first")
+                        raise Exception("You do not own a savings account yet, please consider creating a new one first")
+                    elif(current_balance == my_savings_account.min_balance):
+                        raise Exception(f"You cannot withdraw below the minimum balance, which is {my_savings_account.min_balance} USD")
                     else:
                         while True:
                             try:
@@ -81,6 +71,8 @@ def dashboard_menu(current_option):
                                 if(amount.strip() == ""):
                                     raise ValueError("The response cannot be empty.")
                                 amount = int(amount)
+                                if ((current_balance - amount) < my_savings_account.min_balance):
+                                    raise ValueError(f"You cannot withdraw below the minimum balance, which is {my_savings_account.min_balance} USD")                                    
                                 if amount < 0:
                                     raise ValueError("The amount must be a positive number")
                                 else:
@@ -89,8 +81,8 @@ def dashboard_menu(current_option):
                             except ValueError as ex:
                                 print(f"Error: {ex}")
                         
-                        new_balance = my_savings_account.withdraw_money(amount)
-                        print(f"Your balance is {new_balance} USD")
+                        current_balance = my_savings_account.withdraw_money(amount)
+                        print(f"The withdrawl of {amount} USD has been completed")
 
                 case 4:
                     
