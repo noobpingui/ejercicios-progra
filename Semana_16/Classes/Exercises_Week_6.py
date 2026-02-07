@@ -35,6 +35,8 @@ def reverse_string(string):
 def get_upper_case(string, uppers = 0):
     if not isinstance(string, str):
         raise TypeError("The parameter is not a string")
+    if not all(x.isalpha() or x.isspace() for x in string):
+        raise ValueError("The string can only contain alphabetic characters")
     else:
         for index in range(0, len(string), 1):
             if(string[index] ==  string[index].upper()) & (string[index] != " "):
@@ -48,6 +50,8 @@ def get_upper_case(string, uppers = 0):
 def get_lower_case(string, lowers = 0):
     if not isinstance(string, str):
         raise TypeError("The parameter is not a string")
+    if not all(x.isalpha() or x.isspace() for x in string):
+        raise ValueError("The string can only contain alphabetic characters and spaces")
     else:
         for index in range(0, len(string), 1):
             if(string[index] ==  string[index].lower()) & (string[index] != " "):
@@ -65,6 +69,8 @@ def get_lower_case(string, lowers = 0):
 def sort_list(parameter_1):
     if not isinstance(parameter_1, str):
         raise TypeError("The parameter is not a string")
+    if not all(x.isalpha() or x == "-" for x in parameter_1):
+        raise ValueError("The string can only contain alphabetic characters and dashes")
     else:
         my_list = parameter_1.split("-") #Divido las palabras del string y creo la lista con los elementos
         sorted_list = sorted(my_list) #Ordeno los elementos de la lista y los guardo en una nueva lista ordenada
@@ -77,6 +83,8 @@ def sort_list(parameter_1):
 def get_prime_numbers(my_list, my_new_list):
     if not isinstance(my_list, list):
         raise TypeError("The parameter is not a list")
+    if not all(isinstance(x, int) for x in my_list):
+        raise ValueError("The list can only contain integers")
     else:
         for element in my_list:
             if(element == 1): #Condicion especial en caso que sea 1.

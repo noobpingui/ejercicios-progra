@@ -16,12 +16,20 @@ def test_sum_list_with_big_list():
     # Assert
     assert result == 2646
 
-def test_sum_list_success():
+def test_sum_list_with_a_different_input():
     # Arrange
     input = 1456
     # Act / Assert
     with pytest.raises(TypeError):
         assert sum_list(input)
+
+def test_sum_list_with_empty_list(): 
+    # Arrange
+    input_list = []
+    # Act
+    result = sum_list(input_list)
+    # Assert
+    assert result == 0
 
 #---------------------------------
 
@@ -41,6 +49,14 @@ def test_reverse_string_success():
     # Assert
     assert result == "gnirts a si sihT"
 
+def test_reverse_string_with_no_string_given():
+    # Arrange
+    input = ""
+    # Act
+    result = reverse_string(input)
+    # Assert
+    assert result == ""
+
 #---------------------------------
 
 #c. Exercise 5
@@ -53,11 +69,19 @@ def test_get_upper_case_with_a_different_input():
 
 def test_get_upper_case_success():
     # Arrange
-    input = "I would love to visiting Costa Rica"
+    input = "I would love visiting Costa Rica"
     # Act
     result = get_upper_case(input)
     # Assert
     assert result == 3
+
+def test_get_upper_case_with_invalid_characters():
+    # Arrange
+    input = "A n3w P@th f0r You#g pp/"
+    # Act / Assert
+    with pytest.raises(ValueError):
+        assert get_upper_case(input)
+
 
 
 def test_get_lower_case_with_a_different_input():
@@ -74,6 +98,13 @@ def test_get_lower_case_success():
     result = get_lower_case(input)
     # Assert
     assert result == 24
+
+def test_get_lower_case_with_invalid_characters():
+    # Arrange
+    input = "A n3w P@th f0r You#g pp/"
+    # Act / Assert
+    with pytest.raises(ValueError):
+        assert get_lower_case(input)
 
 #---------------------------------
 
@@ -92,6 +123,13 @@ def test_sort_list_success():
     result = sort_list(input)
     # Assert
     assert result == "airplane-board-gun-hammer-house-juice-picture-sweater-worm-zoo"
+
+def test_sort_list_with_invalid_characters():
+    # Arrange
+    input = "house/zoo/juices/weater/hammer-worm-picture@board^airplane-g#n"
+    # Act / Assert
+    with pytest.raises(ValueError):
+        assert sort_list(input)
 
 #---------------------------------
 
@@ -112,3 +150,11 @@ def test_get_prime_numbers_success():
     result = get_prime_numbers(input, input2)
     # Assert
     assert result == [3, 7, 13, 67, 37, 71]
+
+def test_get_prime_numbers_with_invalid_characters_in_the_list():
+    # Arrang"e
+    input = [60, "&", 15, 19, "A", 3, "n"]
+    input2 = []
+    # Act / Assert
+    with pytest.raises(ValueError):
+        assert get_prime_numbers(input, input2)
