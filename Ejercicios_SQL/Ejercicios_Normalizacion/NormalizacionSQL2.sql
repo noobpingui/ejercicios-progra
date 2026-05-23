@@ -16,19 +16,39 @@
 --     company_name VARCHAR(20) NOT NULL
 -- );
 
+-- CREATE TABLE Insurance_Policies (
+--     id INTEGER PRIMARY KEY AUTOINCREMENT,
+--     insurance_company_id INTEGER NOT NULL,
+--     insurance_policy_name VARCHAR(50) NOT NULL,
+
+--     FOREIGN KEY (insurance_company_id) REFERENCES Insurance_Companies(id)
+-- );
+
+-- CREATE TABLE Makes (
+--     id INTEGER PRIMARY KEY AUTOINCREMENT,
+--     make_name VARCHAR(20) NOT NULL
+-- );
+
+-- CREATE TABLE Models (
+--     id INTEGER PRIMARY KEY AUTOINCREMENT,
+--     make_id INTEGER NOT NULL,
+--     model_name VARCHAR(20) NOT NULL,
+
+--     FOREIGN KEY (make_id) REFERENCES Makes(id)
+-- );
+
 -- CREATE TABLE Vehicles (
 --     id INTEGER PRIMARY KEY AUTOINCREMENT,
 --     vin VARCHAR(20) NOT NULL,
---     vehicle_make VARCHAR(15) NOT NULL,
---     vehicle_model VARCHAR(15) NOT NULL,
+--     model_id INTEGER NOT NULL,
 --     vehicle_year INTEGER NOT NULL,
---     vehicle_color VARCHAR(15) NOT NULL,
+--     vehicle_color VARCHAR(20) NOT NULL,
 --     owner_id INTEGER NOT NULL,
---     insurance_company_id INTEGER NOT NULL,
---     insurance_policy VARCHAR(20) NOT NULL,
+--     insurance_policy_id INTEGER NOT NULL,
 
+--     FOREIGN KEY (model_id) REFERENCES Models(id),
 --     FOREIGN KEY (owner_id) REFERENCES Owners(id),
---     FOREIGN KEY (insurance_company_id) REFERENCES Insurance_Companies(id)
+--     FOREIGN KEY (insurance_policy_id) REFERENCES Insurance_Policies(id)
 -- );
 
 --Data Insertion
@@ -48,18 +68,43 @@
 -- ('DEF INSURANCE'),
 -- ('GHI Insurance');
 
--- INSERT INTO Vehicles (vin, vehicle_make, vehicle_model, vehicle_year, vehicle_color, owner_id, insurance_company_id, insurance_policy)
+-- INSERT INTO Insurance_Policies (insurance_company_id, insurance_policy_name)
 -- VALUES
--- ('1HGCM82633A', 'Honda', 'Accord', 2003, 'Silver', 1, 1, 'Fire & Theft'),
--- ('1HGCM82633A', 'Honda', 'Accord', 2003, 'Silver', 2, 2, 'Full Cover'),
--- ('5J6RM4H79EL', 'Honda', 'CR-V', 2014, 'Blue', 3, 3, 'Collision'),
--- ('1G1RA6EH1FU', 'Chevrolet', 'Volt', 2015, 'Red', 4, 4, 'Basic Legal');
+-- (1, 'Fire & Theft'),
+-- (2, 'Full Cover'),
+-- (3, 'Collision'),
+-- (4, 'Basic Legal');
+
+-- INSERT INTO Makes (make_name)
+-- VALUES
+-- ('Honda'),
+-- ('Chevrolet'),
+-- ('Toyota'),
+-- ('Ford');
+
+-- INSERT INTO Models (make_id, model_name)
+-- VALUES
+-- (1, 'Accord'),
+-- (1, 'CR-V'),
+-- (2, 'Volt'),
+-- (3, 'Camry'),
+-- (4, 'Mustang');
+
+-- INSERT INTO Vehicles (vin, model_id, vehicle_year, vehicle_color, owner_id, insurance_policy_id)
+-- VALUES
+-- ('1HGCM82633A', 1, 2003, 'Silver', 1, 1),
+-- ('1HGCM82633A', 1, 2003, 'Silver', 2, 2),
+-- ('5J6RM4H79EL', 2, 2014, 'Blue', 3, 3),
+-- ('1G1RA6EH1FU', 3, 2015, 'Red', 4, 4);
 
 -- Test Queries
 
 -- SELECT * FROM Owners;
 -- SELECT * FROM Insurance_Companies;
 -- SELECT * FROM Vehicles;
+-- SELECT * FROM Insurance_Policies;
+-- SELECT * FROM Makes;
+-- SELECT * FROM Models;
 
 -----o-----------o-----------o-----------o------
 
