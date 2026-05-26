@@ -68,7 +68,7 @@
 
 -- SELECT Books.name AS book_name, Authors.name AS author_name
 -- FROM Books
--- INNER JOIN Authors 
+-- LEFT JOIN Authors 
 -- ON Books.author_id = Authors.id;
 
 --2. Obtenga todos los libros que no tienen autor
