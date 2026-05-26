@@ -1,0 +1,15 @@
+1. Investigue y busque documentación sobre el SELECT que explique cómo utilizar las funcionalidades de ORDER BY, LIMIT, GROUP BY y 
+tres tipos de JOIN, y cree una tabla (informativa, no de SQL) a partir de sus descubrimientos. Entregue dentro de un archivo .txt, .md o .pdf
+
+
+| Funcionalidad | Descripción                                                                                                                  | Ejemplo SQL                                                                       |
+| ------------- | ---------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
+| `ORDER BY`    | Ordena los resultados de una consulta de forma ascendente (`ASC`) o descendente (`DESC`).                                    | `SELECT * FROM Products ORDER BY price DESC;`                                     |
+| `LIMIT`       | Limita la cantidad de resultados que devuelve una consulta.                                                                  | `SELECT * FROM Products LIMIT 5;`                                                 |
+| `GROUP BY`    | Agrupa filas con valores iguales para aplicar funciones agregadas como `SUM()`, `COUNT()`, `AVG()`.                          | `SELECT product_id, SUM(total) FROM Sales GROUP BY product_id;`                   |
+| ------------- | ---------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
+| `INNER JOIN`  | Muestra únicamente los registros que tienen coincidencias en ambas tablas.                                                   | `SELECT * FROM Orders INNER JOIN Customers ON Orders.customer_id = Customers.id;` |
+| `LEFT JOIN`   | Muestra todos los registros de la tabla izquierda y las coincidencias de la derecha.                                         | `SELECT * FROM Customers LEFT JOIN Orders ON Customers.id = Orders.customer_id;`  |
+| `RIGHT JOIN`  | Muestra todos los registros de la tabla derecha y las coincidencias de la izquierda.(Este no lo soporta SQLite)              | `SELECT * FROM Orders RIGHT JOIN Customers ON Orders.customer_id = Customers.id;` |
+| ------------- | ---------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
+
