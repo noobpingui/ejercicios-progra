@@ -1,0 +1,32 @@
+[
+    {
+        "id": 1,
+        "title": "Tarea 1",
+        "description": "Regar las plantas",
+        "status": "Por Hacer"
+    },
+    {
+        "id": 2,
+        "title": "Tarea 2",
+        "description": "Preparar la cena",
+        "status": "En Progreso"
+    },
+    {
+        "id": 4,
+        "title": "Tarea 4",
+        "description": "Lavar el carro",
+        "status": "En Progreso"
+    },
+    {
+        "id": 5,
+        "title": "Tarea 5",
+        "description": "Sacar la basura",
+        "status": "Por Hacer"
+    },
+    {
+        "id": 6,
+        "title": "Tarea 6",
+        "description": "Testeando ando",
+        "status": "Completada"
+    }
+]
