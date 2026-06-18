@@ -8,6 +8,7 @@
 #----------------#-----------------#
 
 import json
+from exceptions.task_exceptions import TaskNotFoundError, DuplicateTaskIdError
 
 #Task functions
 
@@ -29,7 +30,7 @@ def create_task(new_task):
     
     for task in task_data:
         if task["id"] == new_task["id"]:
-            raise ValueError("Ids duplicados, abortando operacion")
+            raise DuplicateTaskIdError("Ids duplicados, abortando operacion")
         
     task_data.append(new_task)
     
@@ -52,14 +53,14 @@ def get_all_tasks(status_filter=None):
 def update_task(task_id, new_task):
     task_data = read_tasks()
 
-    for index, task in enumerate(task_data):
+    for task in task_data:
         if task["id"] == task_id:
-            task_data[index] = new_task
+            task.update(new_task)
             save_tasks(task_data)
 
             return new_task    
         
-    raise ValueError("No existe un task con ese id")
+    raise TaskNotFoundError("No existe un task con ese id")
 
 #To delete a task based on the url parameter <id>
 def delete_task(task_id):
@@ -72,4 +73,4 @@ def delete_task(task_id):
             
             return None
         
-    raise ValueError("No existe un task con ese id")
+    raise TaskNotFoundError("No existe un task con ese id")

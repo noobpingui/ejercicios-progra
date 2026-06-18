@@ -26,7 +26,13 @@
     {
         "id": 6,
         "title": "Tarea 6",
-        "description": "Testeando ando",
-        "status": "Completada"
+        "description": "Jugar juego de cartas",
+        "status": "Por Hacer"
+    },
+    {
+        "id": 3,
+        "title": "Tarea 3",
+        "description": "Jugar juego de cartas",
+        "status": "Por Hacer"
     }
 ]

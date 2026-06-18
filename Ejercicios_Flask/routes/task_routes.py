@@ -12,8 +12,9 @@
 
 from flask import Blueprint, jsonify, request
 from services.task_services import get_all_tasks, create_task, update_task, delete_task
-from models.task import Task
+from models.task import Task, UpdateTask
 from pydantic import ValidationError
+from exceptions.task_exceptions import TaskNotFoundError, DuplicateTaskIdError
 
 #Blue Print registration
 tasks_bp = Blueprint (
@@ -46,8 +47,8 @@ def post_tasks():
     except ValidationError as error:
         return {"error": str(error)}, 400
 
-    except ValueError as error:
-        return {"error": str(error)}, 400
+    except DuplicateTaskIdError as error:
+        return {"error": str(error)}, 409
 
 #PUT
 @tasks_bp.route('/<int:task_id>', methods=['PUT'])
@@ -55,7 +56,7 @@ def put_tasks(task_id):
     
     try:
         body = request.get_json()
-        new_task = Task(**body).model_dump()
+        new_task = UpdateTask(**body).model_dump()
 
         updated_task = update_task(task_id, new_task)
 
@@ -64,8 +65,8 @@ def put_tasks(task_id):
     except ValidationError as error:
         return {"error": str(error)}, 400
 
-    except ValueError as error:
-        return {"error": str(error)}, 400
+    except TaskNotFoundError as error:
+        return {"error": str(error)}, 404
 
 #DELETE
 @tasks_bp.route('/<int:task_id>', methods=['DELETE'])
@@ -78,5 +79,5 @@ def delete_tasks(task_id):
             "message": f"Se elimino la tarea con el ID: {task_id}"
         }, 200  
 
-    except ValueError as error:
-        return {"error": str(error)}, 400
+    except TaskNotFoundError as error:
+        return {"error": str(error)}, 404

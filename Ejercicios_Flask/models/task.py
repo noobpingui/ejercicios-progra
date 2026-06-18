@@ -15,6 +15,11 @@ class Task(BaseModel):
     description: str = Field(min_length=1) #validacion campo no puede ir vacio
     status: TaskStatus #Solo acepta ENUM values y no puede ir vacio por lo mismo
 
+class UpdateTask(BaseModel):
+    title: str = Field(min_length=1) #validacion campo no puede ir vacio
+    description: str = Field(min_length=1) #validacion campo no puede ir vacio
+    status: TaskStatus #Solo acepta ENUM values y no puede ir vacio por lo mismo
+
 
 # datos_validos = {
 
