@@ -1,4 +1,5 @@
 import psycopg2
+import psycopg2.extras
 
 
 class PgManager:
@@ -12,8 +13,7 @@ class PgManager:
         self.connection = self.create_connection()
         if self.connection:
             print("Connected to database!")
-            self.cursor = self.connection.cursor()
-
+            self.cursor = self.connection.cursor(cursor_factory=psycopg2.extras.RealDictCursor)
         
     def create_connection(self):
         try:
@@ -45,7 +45,7 @@ class PgManager:
 
         #Confirmamos si el query devuelve algo o no 
         #En caso de devolver algo lo recuperamos y lo retornamos. Ex: SELECT
-        #Y si no, solo se ejecuta el query pero sin devolver nada. Ex: INSERT
+        #Y si no, solo se ejecuta el query pero sin devolver nada. Ex: PUT
         if self.cursor.description:
             result = self.cursor.fetchall()
             return result

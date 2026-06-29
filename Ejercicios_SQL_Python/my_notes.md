@@ -95,3 +95,26 @@ o
 PostgresTaskRepository
 o
 FakeTaskRepository
+
+
+FLUJO COMPLETO:
+
+  Request HTTP
+      → Route        (recibe el request, extrae datos)
+          → Service  (aplica reglas de negocio)
+              → Repository (ejecuta SQL)
+                  → PostgreSQL
+              ← Repository (devuelve dict)
+          ← Service  (devuelve resultado)
+      ← Route        (construye response HTTP)
+  Response HTTP
+
+
+Lo realizado:
+    
+    - Arquitectura en capas limpia: Routes → Services → Repositories → DB
+    - Dependency injection con blueprint factory pattern
+    - Validacion con Pydantic en la capa HTTP
+    - Excepciones de dominio por capa
+    - SQL dinamico con whitelist para prevenir SQL injection
+    - Reglas de negocio coordinadas entre multiples repositorios (RentalService)
