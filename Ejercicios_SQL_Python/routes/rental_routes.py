@@ -8,9 +8,9 @@
 from flask import Blueprint, jsonify, request
 
 from pydantic import ValidationError
-from exceptions.rental_exceptions import UserNotExists, UserNotActive, UserIsDelinquent, CarNotExists, CarNotAvailable, RentalNotFound, RentalNotActive
+from exceptions.rental_exceptions import UserNotExists, UserNotActive, UserIsDelinquent, CarNotExists, CarNotAvailable, RentalNotFound, RentalCompletedAlready
 
-from models.rental import RentalCreate, RentalResponse, RentalStatusUpdate
+from models.rental import RentalCreate, RentalResponse
 
 #Blueprint registration
 
@@ -67,7 +67,7 @@ def create_rental_blueprint(rental_service):
             return {"error": str(error)}, 400
         
         except UserNotExists as error:
-            return {"error": str(error)}, 409
+            return {"error": str(error)}, 404
         
         except UserNotActive as error:
             return {"error": str(error)}, 409
@@ -76,7 +76,7 @@ def create_rental_blueprint(rental_service):
             return {"error": str(error)}, 409
         
         except CarNotExists as error:
-            return {"error": str(error)}, 409
+            return {"error": str(error)}, 404
         
         except CarNotAvailable as error:
             return {"error": str(error)}, 409
@@ -86,12 +86,8 @@ def create_rental_blueprint(rental_service):
     def put_rental(id): #Flask inyecta el id recibido en el url, aqui
 
         try:
-            body = request.get_json()
-
-            #Se valida lo que llega con el model de CarStatusUpdate
-            new_status = RentalStatusUpdate(**body)
-
-            rental_service.complete_rental(id, new_status.status)
+            
+            rental_service.complete_rental(id)
 
             #En este caso no es necesario devolver un response. Simplemente un mensaje de exito
 
@@ -101,9 +97,9 @@ def create_rental_blueprint(rental_service):
             return {"error": str(error)}, 400
         
         except RentalNotFound as error:
-            return {"error": str(error)}, 409
+            return {"error": str(error)}, 404
         
-        except RentalNotActive as error:
+        except RentalCompletedAlready as error:
             return {"error": str(error)}, 409
 
     return rental_bp

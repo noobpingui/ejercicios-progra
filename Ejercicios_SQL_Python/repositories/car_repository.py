@@ -65,7 +65,7 @@ class CarRepository:
         result = self.db.execute_query(query, *params)
 
         if not result:
-            return None
+            return []
         
         return result
         #Devuelve la lista completa de filas (no solo la primera como en get_car_by_id).

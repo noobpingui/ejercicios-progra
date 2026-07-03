@@ -76,7 +76,7 @@ class UserRepository:
         result = self.db.execute_query(query, *params)
 
         if not result:
-            return None
+            return []
         
         return result
         #Devuelve la lista completa de filas (no solo la primera como en get_user_by_id).

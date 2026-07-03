@@ -93,7 +93,7 @@ def create_user_blueprint(user_service):
             return {"error": str(error)}, 400
         
         except UserNotFound as error:
-            return {"error": str(error)}, 409
+            return {"error": str(error)}, 404
 
 
     #PUT - Is_delinquent
@@ -107,7 +107,7 @@ def create_user_blueprint(user_service):
             return jsonify({"message": "User has been flagged as delinquent"}), 200
         
         except UserNotFound as error:
-            return {"error": str(error)}, 409
+            return {"error": str(error)}, 404
         
         except UserIsDelinquent as error:
             return {"error": str(error)}, 409

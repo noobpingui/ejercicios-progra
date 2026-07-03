@@ -42,7 +42,7 @@ class RentalRepository:
         result = self.db.execute_query(query, *params)
 
         if not result:
-            return None
+            return []
         
         return result
         #Devuelve la lista completa de filas (no solo la primera como en get_rental_by_id).
@@ -90,14 +90,14 @@ class RentalRepository:
         
         return dict(result[0])
 
-    def complete_rental(self, status: RentalStatus, id: int) -> None:
+    def complete_rental(self, id: int) -> None:
         query = """
         UPDATE lyfter_car_rental.rental
-            SET status = %s
+            SET status = 'completed'
         WHERE id = %s
         """
 
-        self.db.execute_query(query, status, id)
+        self.db.execute_query(query, id)
 
-        return None   
+        return None
     

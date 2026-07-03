@@ -81,7 +81,7 @@ def create_car_blueprint(car_service):
             return {"error": str(error)}, 400
         
         except CarNotFound as error:
-            return {"error": str(error)}, 409
+            return {"error": str(error)}, 404
 
 
 

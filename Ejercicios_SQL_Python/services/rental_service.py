@@ -10,9 +10,9 @@ from repositories.rental_repository import RentalRepository
 from repositories.user_repository import UserRepository
 from repositories.car_repository import CarRepository
 
-from exceptions.rental_exceptions import UserNotExists, UserNotActive, UserIsDelinquent, CarNotExists, CarNotAvailable, RentalNotFound, RentalNotActive
+from exceptions.rental_exceptions import UserNotExists, UserNotActive, UserIsDelinquent, CarNotExists, CarNotAvailable, RentalNotFound, RentalCompletedAlready
 
-from models.rental import RentalCreate, RentalStatus
+from models.rental import RentalCreate
 from models.car import CarStatus
 
 
@@ -64,10 +64,10 @@ class RentalService():
             raise RentalNotFound(f"The rental with the ID:{rental_id} does not exist")
         
         return existing_rental
-    
-    def _rental_not_active(self, rental: dict):
-        if rental['status'] != 'active':
-            raise RentalNotActive(f"This rental has been completed already")
+        
+    def _rental_completed_already(self, rental: dict):
+        if rental['status'] == 'completed':
+            raise RentalCompletedAlready(f"This rental has been completed already")
     
     #Method to create a rental
     def create_rental(self, rental: RentalCreate):
@@ -96,11 +96,11 @@ class RentalService():
 
         return created_rental
     
-    def complete_rental(self, rental_id, status: RentalStatus):
+    def complete_rental(self, rental_id):
         rental = self._rental_not_found(rental_id)
-        self._rental_not_active(rental)
+        self._rental_completed_already(rental)
 
-        rental_completed = self.rental_repository.complete_rental(status, rental_id)
+        rental_completed = self.rental_repository.complete_rental(rental_id)
         self.car_repository.update_car_status(CarStatus.available, rental['car_id'])
 
         return rental_completed

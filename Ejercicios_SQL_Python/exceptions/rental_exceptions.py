@@ -18,5 +18,5 @@ class CarNotAvailable(Exception):
 class RentalNotFound(Exception):
     pass
 
-class RentalNotActive(Exception):
+class RentalCompletedAlready(Exception):
     pass
