@@ -1,0 +1,7 @@
+
+.venv/
+.env
+private_key.pem
+
+
+JWT_notes.md
