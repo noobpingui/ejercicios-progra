@@ -1,6 +1,7 @@
 from sqlalchemy.orm import Session
 from sqlalchemy import select
 from models.user import User
+from exceptions.user_exceptions import UserNotFound
 
 class UserRepository:
     def __init__(self, db: Session):
@@ -18,6 +19,9 @@ class UserRepository:
     def get_user_by_id(self, user_id: int):
         
         user = self.db.get(User, user_id)
+
+        if user is None:
+            raise UserNotFound(f"The user with id:{user_id} was not found")
 
         return user
     
@@ -55,7 +59,7 @@ class UserRepository:
         #Guardo los cambios realizados
         self.db.commit()
 
-        return None
+        return user
     
     #Get all users:
     def get_all_users(self):

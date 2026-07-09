@@ -1,6 +1,7 @@
 from sqlalchemy.orm import Session
 from sqlalchemy import select
 from models.address import Address
+from exceptions.address_exceptions import AddressNotFound
 
 class AddressRepository:
     def __init__(self, db: Session):
@@ -18,6 +19,9 @@ class AddressRepository:
     def get_address_by_id(self, address_id: int):
         
         address = self.db.get(Address, address_id)
+
+        if address is None:
+            raise AddressNotFound(f"The Address with id:{address_id} was not found")
 
         return address
     
@@ -60,7 +64,7 @@ class AddressRepository:
         #Guardo los cambios realizados
         self.db.commit()
 
-        return None
+        return address
     
     #Get all addresses:
     def get_all_addresses(self):

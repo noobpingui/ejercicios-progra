@@ -1,10 +1,15 @@
 
 from models.base import Base
 
-from sqlalchemy.orm import Mapped, mapped_column
+from sqlalchemy.orm import Mapped, mapped_column, relationship
 from sqlalchemy import String, Enum as sqlAlchemyEnum, ForeignKey
 from enum import Enum as PyEnum
 from typing import Optional
+
+#Para evitar importacion circular en tiempo de ejecucion. Necesario para usar relationship()
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+    from models.user import User
 
 
 class CarStatus(str, PyEnum):
@@ -20,6 +25,10 @@ class Car(Base):
     year: Mapped[int] = mapped_column()
     status: Mapped[CarStatus] = mapped_column(sqlAlchemyEnum(CarStatus))
     user_id: Mapped[Optional[int]] = mapped_column(ForeignKey("lyfter_ORM_exercise.users.id"))
+
+    #To try relationship() with User
+    user: Mapped["User"] = relationship(back_populates="cars")
+
 
     #Para ver "bonito" el resultado de el objeto car cuando hago las pruebas en app.py
     def __repr__(self):

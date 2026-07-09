@@ -1,6 +1,10 @@
 from sqlalchemy.orm import Session
 from sqlalchemy import select
 from models.car import Car
+from models.user import User
+
+from exceptions.car_exceptions import CarNotFound, RelatedUserIdNotFound
+from exceptions.user_exceptions import UserNotFound
 
 class CarRepository:
     def __init__(self, db: Session):
@@ -19,6 +23,9 @@ class CarRepository:
         
         car = self.db.get(Car, car_id)
 
+        if car is None:
+            raise CarNotFound(f"The car with id:{car_id} was not found")
+
         return car
     
     #Update Car:
@@ -26,7 +33,7 @@ class CarRepository:
         
         #Obtengo el car por id
         car = self.get_car_by_id(car_id)
-        
+
         #Modifico la data si el campo que llega no es None
         if brand is not None:
             car.brand = brand
@@ -50,14 +57,14 @@ class CarRepository:
 
         #Obtengo el car por id
         car = self.get_car_by_id(car_id)
-
+       
         #Borro el car
         self.db.delete(car)
 
         #Guardo los cambios realizados
         self.db.commit()
 
-        return None
+        return car
     
     #Get all cars:
     def get_all_cars(self):
@@ -77,6 +84,11 @@ class CarRepository:
         
         #Obtengo el car por id
         car = self.get_car_by_id(car_id)
+
+        #Confirmo si el user con el user_id existe
+        user = self.db.get(User, user_id)
+        if user is None:
+            raise RelatedUserIdNotFound(f"The related user with id:{user_id} was not found")
 
         #Modifico el user_id que llega como parametro
         car.user_id = user_id
