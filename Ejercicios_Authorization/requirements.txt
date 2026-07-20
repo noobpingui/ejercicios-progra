@@ -4,3 +4,4 @@ python-dotenv
 flask
 PyJWT
 cryptography
+bcrypt

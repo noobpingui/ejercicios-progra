@@ -14,22 +14,23 @@ class JWT_Manager:
         
         self.algorithm = "RS256"
 
-    def generate_token(self, data: Dict[str, Any], expires_in_minutes: int = 30) -> str:
+    def generate_token(self, claims: Dict[str, Any], expires_in_minutes: int) -> str:
         try:
 
             #To creaet a new dict, add the expiration data below and keep the original dict untouched/clean
-            payload = data.copy()
+            payload = claims.copy()
 
             #Standard security
             now = datetime.datetime.now(datetime.timezone.utc)
+            
             payload.update({
                 "iat": now,  #issued at
                 "exp": now + datetime.timedelta(minutes=expires_in_minutes) #Expiration
             })
 
             #To encode with private key
-            encoded = jwt.encode(payload, self.private_key, algorithm=self.algorithm)
-            return encoded
+            token = jwt.encode(payload, self.private_key, algorithm=self.algorithm)
+            return token
         
         except jwt.InvalidTokenError as e:
             print(f"Invalid token error: {e}")
@@ -39,8 +40,8 @@ class JWT_Manager:
 
         #To verify and decode a JWT Token using the public key
         try:
-            decoded = jwt.decode(token, self.public_key, algorithms=[self.algorithm])
-            return decoded
+            payload = jwt.decode(token, self.public_key, algorithms=[self.algorithm])
+            return payload
         
         except jwt.ExpiredSignatureError:
             print("The token has expired")

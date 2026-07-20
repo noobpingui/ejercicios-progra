@@ -7,7 +7,11 @@ import os
 #Models
 
 from models.base import Base
+
+# SQLAlchemy only knows about a model after its class has been imported
+# By importing the models, this trigger the registration of the model before create_all runs.
 from models.user import User
+from models.product import Product
 
 load_dotenv()
 
