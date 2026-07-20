@@ -1,0 +1,6 @@
+Packages - dependencies:
+
+* pip install SQLAlchemy
+* pip install psycopg2-binary
+* pip install python-dotenv
+
