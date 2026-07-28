@@ -62,18 +62,13 @@ class UserService():
         return token
 
     #get_me
-    def get_me(self, token):
+    def get_me(self, user_id: int):
 
-        decoded_token = self.jwt_manager.decode_token(token)
-
-        if decoded_token is None:
-            raise InvalidToken("Invalid token")
-        
-        user = self.user_repository.get_user_by_id(decoded_token["id"])
+        user = self.user_repository.get_user_by_id(user_id)
 
         if user is None:
             raise UserDoesNotExist("The user does not exist")
 
-        return user      
+        return user
     
         

@@ -2,7 +2,7 @@
 
 from models.product import Product
 from repositories.product_repository import ProductRepository
-from exceptions.product_exceptions import DuplicatedProductName, ProductNotExist
+from exceptions.product_exceptions import DuplicatedProductName, ProductNotExists
 
 
 
@@ -20,12 +20,18 @@ class ProductService():
         new_product = self.product_repository.create_product(product)
 
         return new_product
+    
+    def get_all_products(self):
+
+        products = self.product_repository.get_all_products()
+
+        return products
 
     def get_product_by_id(self, product_id: int):
 
         product = self.product_repository.get_product_by_id(product_id)
         if product is None:
-            raise ProductNotExist(f"The product with the ID: {product_id} does not exist")
+            raise ProductNotExists(f"The product with the ID: {product_id} does not exist")
         
         return product
     
@@ -33,7 +39,7 @@ class ProductService():
 
         product = self.product_repository.get_product_by_name(product_name)
         if product is None:
-            raise ProductNotExist(f"A product with that name has not been registered yet")
+            raise ProductNotExists(f"A product with that name has not been registered yet")
         
         return product
         
@@ -41,7 +47,7 @@ class ProductService():
 
         product = self.product_repository.get_product_by_id(product_id)
         if product is None:
-            raise ProductNotExist(f"The product with the ID: {product_id} does not exist")
+            raise ProductNotExists(f"The product with the ID: {product_id} does not exist")
         
         self.product_repository.delete_product(product.id)
 
@@ -51,7 +57,7 @@ class ProductService():
 
         product = self.product_repository.get_product_by_id(product_id)
         if product is None:
-            raise ProductNotExist(f"The product with the ID: {product_id} does not exist")
+            raise ProductNotExists(f"The product with the ID: {product_id} does not exist")
         
         if name is not None:
             product.name = name

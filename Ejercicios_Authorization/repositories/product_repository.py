@@ -16,6 +16,19 @@ class ProductRepository():
 
         return product
 
+    #GET ALL PRODUCTS
+    def get_all_products(self):
+        #select(Product) -- contruye la query SELECT * FROM products
+        #self.db.execute(...) -- ejecuta la query y devuelve un resultado crudo en filas
+        #.scalars() -- convierte las filas en objetos Python(Product), en lugar de tuplas
+        # .all() -- materializa todo en una lista 
+        #El flujo es: query → ejecutar → convertir a objetos → lista
+        products = self.db.execute(select(Product)).scalars().all()
+
+        return products
+
+
+
     #GET PRODUCT BY ID
     def get_product_by_id(self, product_id: int):
 

@@ -1,6 +1,6 @@
 
 from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker
+from sqlalchemy.orm import sessionmaker, scoped_session
 from dotenv import load_dotenv
 import os
 
@@ -12,6 +12,7 @@ from models.base import Base
 # By importing the models, this trigger the registration of the model before create_all runs.
 from models.user import User
 from models.product import Product
+from models.invoice import Invoice
 
 load_dotenv()
 
@@ -28,5 +29,18 @@ except Exception as e:
 
 Base.metadata.create_all(engine)
 
-#SessionMaker
-SessionLocal = sessionmaker(bind=engine)
+
+
+# scoped_session wraps sessionmaker in an object whose job is: "when someone asks me for a session, 
+# look up whether the current context (by default, current thread) already has one; 
+# if yes, return that same one; if no, create one, store it, and return it.
+
+#Session
+Session = scoped_session(
+    sessionmaker(
+        bind=engine,
+        autoflush=False,
+        autocommit=False
+    )
+)
+

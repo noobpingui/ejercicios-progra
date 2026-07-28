@@ -3,6 +3,9 @@
 class DuplicatedProductName(Exception):
     pass
 
-class ProductNotExist(Exception):
+class ProductNotExists(Exception):
+    pass
+
+class InsufficientStock(Exception):
     pass
 

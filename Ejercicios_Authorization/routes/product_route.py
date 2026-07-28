@@ -1,210 +1,114 @@
-
-
 from flask import Blueprint, jsonify, request, Response
+
 from models.product import Product
+from exceptions.product_exceptions import DuplicatedProductName, ProductNotExists
 
-from jwt_manager import JWT_Manager
+from decorators import require_admin
 
-from exceptions.product_exceptions import DuplicatedProductName, ProductNotExist
-from exceptions.token_exceptions import InvalidToken
 
 def create_product_blueprint(product_service, jwt_manager):
-    product_bp = Blueprint (
+    product_bp = Blueprint(
         'product_bp',
         __name__,
         url_prefix="/products"
     )
 
-    #Routes
-
-    #Post
+    #POST
     @product_bp.route('/', methods=['POST'])
+    @require_admin(jwt_manager)
     def create_product():
-
         try:
+            data = request.get_json()
+            if data.get('name') is None or data.get('price') is None or data.get('quantity') is None:
+                return Response(status=400)
 
-            #To fetch the Authorization header safely
-            auth_header = request.headers.get('Authorization') #Returns None if missing
+            new_product = Product(name=data.get('name'),
+                                  price=data.get('price'),
+                                  quantity=data.get('quantity'))
 
-            if auth_header is None:
-                return jsonify({"error": "Authorization header is missing"}), 401
-            
-            #Split 'Bearer' and the actual token
-            #Expecting format: "Bearer <token_string>"
-            header_parts = auth_header.split()
+            product = product_service.create_product(new_product)
 
-            if header_parts[0].lower() != 'bearer':
-                return jsonify({"error": "Authorization header must start with 'Bearer'"}), 401
-            elif len(header_parts) == 1:
-                return jsonify({"error": "Token missing from Bearer header"}), 401
-            elif len(header_parts) > 2:
-                return jsonify({"error": "Authorization header must be 'Bearer <token>'"}), 401
+            return jsonify(
+                id=product.id,
+                name=product.name,
+                price=float(product.price),
+                quantity=product.quantity
+            ), 201
 
-            token = header_parts[1]
-
-            decoded_token = jwt_manager.decode_token(token)
-
-            if decoded_token is None:
-                raise InvalidToken("Invalid token")
-
-            if decoded_token["user_role"] != "admin":
-                
-                return jsonify({"error": "Forbidden: admin access required"}), 403
-            
-            else:
-
-                data = request.get_json()
-                if(data.get('name') == None or data.get('price') == None or data.get('quantity') == None):
-                    return Response(status=400)
-                else:
-                    new_product = Product(name=data.get('name'),
-                                          price=data.get('price'),
-                                          quantity=data.get('quantity'))
-
-                    product = product_service.create_product(new_product)
-
-                    return jsonify(id=product.id, name=product.name, price=product.price, quantity=product.quantity)
-        
         except DuplicatedProductName as error:
-            return {"error": str (error)}, 400
-        except InvalidToken as error:
-            return {"error": str (error)}, 401
-        
+            return {"error": str(error)}, 400
 
 
-    #GET    
+    #GET ALL
+    @product_bp.route('/', methods=['GET'])
+    @require_admin(jwt_manager)
+    def get_all_products():
+
+        products = product_service.get_all_products()
+
+        return jsonify([
+            {
+                "id": product.id,
+                "name": product.name,
+                "price": float(product.price),
+                "entry_date": product.entry_date.isoformat(),
+                "quantity": product.quantity
+            }
+            for product in products
+        ]), 200
+
+
+    #GET BY ID
     @product_bp.route('/<int:id>', methods=['GET'])
+    @require_admin(jwt_manager)
     def get_product_by_id(id):
-        
         try:
+            product = product_service.get_product_by_id(id)
 
-            #To fetch the Autorization header safely
-            auth_header = request.headers.get('Authorization') #Returns None if missing
+            return jsonify(
+                id=product.id,
+                name=product.name,
+                price=float(product.price),
+                quantity=product.quantity
+            ), 200
 
-            if auth_header is None:
-                return jsonify({"error": "Authorization header is missing"}), 401
-            
-            #Split 'Bearer' and the actual token
-            #Expecting format: "Bearer <token_string>"
-            header_parts = auth_header.split()
+        except ProductNotExists as error:
+            return {"error": str(error)}, 404
 
-            if header_parts[0].lower() != 'bearer':
-                return jsonify({"error": "Authorization header must start with 'Bearer'"}), 401
-            elif len(header_parts) == 1:
-                return jsonify({"error": "Token missing from Bearer header"}), 401
-            elif len(header_parts) > 2:
-                return jsonify({"error": "Authorization header must be 'Bearer <token>'"}), 401
-
-            token = header_parts[1]
-
-            decoded_token = jwt_manager.decode_token(token)
-
-            if decoded_token is None:
-                raise InvalidToken("Invalid token")
-            
-            else:
-            
-                product = product_service.get_product_by_id(id)
-                
-                return jsonify(id=product.id, name=product.name, price=product.price, quantity=product.quantity)
-                
-        except ProductNotExist as error:
-            return {"error": str (error)}, 404
-        except InvalidToken as error:
-            return {"error": str (error)}, 401
-        
 
     #DELETE
     @product_bp.route('/<int:id>', methods=['DELETE'])
+    @require_admin(jwt_manager)
     def delete_product(id):
-
         try:
-            #To fetch the Authorization header safely
-            auth_header = request.headers.get('Authorization') #Returns None if missing
+            product = product_service.get_product_by_id(id)
 
-            if auth_header is None:
-                return jsonify({"error": "Authorization header is missing"}), 401
-            
-            #Split 'Bearer' and the actual token
-            #Expecting format: "Bearer <token_string>"
-            header_parts = auth_header.split()
+            product_service.delete_product(product.id)
 
-            if header_parts[0].lower() != 'bearer':
-                return jsonify({"error": "Authorization header must start with 'Bearer'"}), 401
-            elif len(header_parts) == 1:
-                return jsonify({"error": "Token missing from Bearer header"}), 401
-            elif len(header_parts) > 2:
-                return jsonify({"error": "Authorization header must be 'Bearer <token>'"}), 401
+            return jsonify(f"The product with the ID:{product.id} has been successfully deleted"), 200
 
-            token = header_parts[1]
+        except ProductNotExists as error:
+            return {"error": str(error)}, 404
 
-            decoded_token = jwt_manager.decode_token(token)
 
-            if decoded_token is None:
-                raise InvalidToken("Invalid token")
-
-            if decoded_token["user_role"] != "admin":
-                return jsonify({"error": "Forbidden: admin access required"}), 403
-            
-            else:
-            
-                product = product_service.get_product_by_id(id)
-                
-                product_service.delete_product(product.id)
-
-                return jsonify(f"The product with the ID:{product.id} has been successfully deleted"), 200
-
-        except ProductNotExist as error:
-            return {"error": str (error)}, 404
-        except InvalidToken as error:
-            return {"error": str (error)}, 401
-        
-    
     #PUT
     @product_bp.route('/<int:id>', methods=['PUT'])
+    @require_admin(jwt_manager)
     def update_product(id):
-
         try:
+            data = request.get_json()
 
-            #To fetch the Authorization header safely
-            auth_header = request.headers.get('Authorization') #Returns None if missing
+            updated_product = product_service.update_product(id, data.get('name'), data.get('price'), data.get('quantity'))
 
-            if auth_header is None:
-                return jsonify({"error": "Authorization header is missing"}), 401
-            
-            #Split 'Bearer' and the actual token
-            #Expecting format: "Bearer <token_string>"
-            header_parts = auth_header.split()
+            return jsonify(
+                id=updated_product.id,
+                name=updated_product.name,
+                price=float(updated_product.price),
+                quantity=updated_product.quantity
+            ), 200
 
-            if header_parts[0].lower() != 'bearer':
-                return jsonify({"error": "Authorization header must start with 'Bearer'"}), 401
-            elif len(header_parts) == 1:
-                return jsonify({"error": "Token missing from Bearer header"}), 401
-            elif len(header_parts) > 2:
-                return jsonify({"error": "Authorization header must be 'Bearer <token>'"}), 401
-
-            token = header_parts[1]
-
-            decoded_token = jwt_manager.decode_token(token)
-
-            if decoded_token is None:
-                raise InvalidToken("Invalid token")
-
-            if decoded_token["user_role"] != "admin":
-                return jsonify({"error": "Forbidden: admin access required"}), 403
-            
-            else:
-            
-                data = request.get_json()
-        
-                updated_product = product_service.update_product(id, data.get('name'), data.get('price'), data.get('quantity'))
-
-                return jsonify(id=updated_product.id, name=updated_product.name, price=updated_product.price, quantity=updated_product.quantity), 200
-                           
-        except ProductNotExist as error:
-            return {"error": str (error)}, 404
-        except InvalidToken as error:
-            return {"error": str (error)}, 401
+        except ProductNotExists as error:
+            return {"error": str(error)}, 404
 
 
     return product_bp
