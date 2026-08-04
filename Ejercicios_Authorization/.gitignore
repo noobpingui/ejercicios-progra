@@ -1,0 +1,12 @@
+
+.venv/
+.env
+__pycache__/
+private_key.pem
+
+
+
+JWT_notes.md
+Hashing_notes.md
+Requirements_notes.md
+
