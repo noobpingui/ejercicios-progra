@@ -44,13 +44,13 @@ jwt_manager = JWT_Manager('.\private_key.pem', '.\public_key.pem')
 
 #Repositories -> dependencies
 user_repository = UserRepository(Session)
-product_repository = ProductRepository(Session, redis_client)
+product_repository = ProductRepository(Session)
 invoice_repository = InvoiceRepository(Session)
 
 #Services -> dependencies
 user_service = UserService(user_repository, jwt_manager)
-product_service = ProductService(product_repository)
-invoice_service = InvoiceService(invoice_repository, product_repository)
+product_service = ProductService(product_repository, redis_client)
+invoice_service = InvoiceService(invoice_repository, product_service)
 
 #Route/Blueprint registration
 app.register_blueprint(create_user_blueprint(user_service, jwt_manager))

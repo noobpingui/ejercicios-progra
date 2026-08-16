@@ -7,5 +7,3 @@ cryptography
 bcrypt
 redis
 pydantic
-
-
