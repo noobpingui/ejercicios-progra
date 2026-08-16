@@ -9,3 +9,6 @@ class ProductNotExists(Exception):
 class InsufficientStock(Exception):
     pass
 
+class ProductInUse(Exception):
+    pass
+
