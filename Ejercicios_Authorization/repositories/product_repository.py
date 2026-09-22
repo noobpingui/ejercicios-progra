@@ -1,12 +1,16 @@
 
-from models.product import Product
-from sqlalchemy.orm import Session
-from sqlalchemy import select
+from models.product import Product #SQLAlchemy model (The real table in Postgres)
+from sqlalchemy.orm import Session #For the contructor
+from sqlalchemy import select #Required to build SELECT queries
+
+from sqlalchemy.exc import IntegrityError #Required to 'catch' the error related to the DB, in this particular case when trying to delete a product that is related to the invoice / So we can show a 'friendly' message to the user instead of an ugly error window or even worse, the app stops working
+from exceptions.product_exceptions import ProductInUse 
 
 class ProductRepository():
-    def __init__(self, db: Session):
-        self.db = db
-
+    def __init__(self, db: Session): #The constructor receives the DB session
+        self.db = db #SQLAlchemy session. (The real source of data)
+        
+    #CRUD
     
     #CREATE PRODUCT
     def create_product(self, product: Product):
@@ -18,22 +22,19 @@ class ProductRepository():
 
     #GET ALL PRODUCTS
     def get_all_products(self):
-        #select(Product) -- contruye la query SELECT * FROM products
-        #self.db.execute(...) -- ejecuta la query y devuelve un resultado crudo en filas
-        #.scalars() -- convierte las filas en objetos Python(Product), en lugar de tuplas
-        # .all() -- materializa todo en una lista 
-        #El flujo es: query → ejecutar → convertir a objetos → lista
+
         products = self.db.execute(select(Product)).scalars().all()
 
         return products
-
-
-
+    
     #GET PRODUCT BY ID
     def get_product_by_id(self, product_id: int):
 
-        product = self.db.get(Product, product_id)
-        
+        product = self.db.get(Product, product_id) #db.get() look for the PK directly
+
+        if product is None: #It does not exist in the DB
+            return None 
+    
         return product
     
     #GET PRODUCT BY NAME
@@ -50,8 +51,13 @@ class ProductRepository():
     def delete_product(self, product_id: int):
 
         product = self.db.get(Product, product_id)
-        self.db.delete(product)
-        self.db.commit()
+        try:
+            self.db.delete(product)
+            self.db.commit()
+
+        except IntegrityError:
+            self.db.rollback() #Required since the commit was rejected by Postgress due to the FK, hence, the rollback is required to 'clear' the session and set it fresh to use
+            raise ProductInUse(f"The product with the ID: {product_id} cannot be deleted because it has associated invoices")
 
         return None
 
@@ -75,5 +81,4 @@ class ProductRepository():
         self.db.refresh(product)
 
         return product
-    
     

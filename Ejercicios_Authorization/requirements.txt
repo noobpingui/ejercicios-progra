@@ -5,3 +5,5 @@ flask
 PyJWT
 cryptography
 bcrypt
+redis
+pydantic

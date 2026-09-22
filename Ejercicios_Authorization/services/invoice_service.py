@@ -1,20 +1,20 @@
 
 from models.invoice import Invoice
 from repositories.invoice_repository import InvoiceRepository
-from repositories.product_repository import ProductRepository
+from services.product_service import ProductService
 
 from exceptions.product_exceptions import ProductNotExists, InsufficientStock
 
 from exceptions.invoice_exceptions import InvoiceNotExists
 
 class InvoiceService():
-    def __init__(self, invoice_repository: InvoiceRepository, product_repository: ProductRepository):
+    def __init__(self, invoice_repository: InvoiceRepository, product_service: ProductService):
           self.invoice_repository = invoice_repository
-          self.product_repository = product_repository
+          self.product_service = product_service
 
     def purchase_product(self, user_id: int, product_id: int, quantity: int):
 
-        product = self.product_repository.get_product_by_id(product_id)
+        product = self.product_service.get_product_by_id(product_id)
         if product is None:
             raise ProductNotExists(f"The product with the ID: {product_id} does not exist")
 
@@ -33,7 +33,7 @@ class InvoiceService():
         invoice = self.invoice_repository.create_invoice(new_invoice)
 
         #To reduce product stock when a purchase is completed
-        self.product_repository.update_product(product_id, quantity=product.quantity - quantity)
+        self.product_service.update_product(product_id, quantity=product.quantity - quantity)
 
         return invoice
 
